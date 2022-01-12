@@ -5,7 +5,11 @@ class Order extends React.Component {
 	renderOrder = key => {
 		const fish = this.props.fishes[key]
 		const count = this.props.order[key]
-		const isAvailable = fish.status === 'available'
+		
+		// as we're now setting state with localStorage and then doing syncState we need to wait for the DB to return the fishes
+		const isAvailable = fish && fish.status === 'available'
+		if (!fish) return null;
+		
 		if(!isAvailable) {
 			return (
 				<li key={key}>Sorry {fish ? fish.name : 'fish'} is no longer available</li>
@@ -13,8 +17,7 @@ class Order extends React.Component {
 		}
 		return (
 			<li key={key}>
-				{count} lbs {fish.name}
-				{formatPrice(count * fish.price)}
+				{count} lbs {fish.name} {formatPrice(count * fish.price)}
 			</li>
 		)
 	};
