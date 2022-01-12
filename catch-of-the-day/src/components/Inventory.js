@@ -11,7 +11,8 @@ class Inventory extends React.Component {
 				key={key}
 				index={key}
 				fish={this.props.fish[key]} 
-				updateFish={this.props.updateFish}>
+				updateFish={this.props.updateFish}
+				deleteFish={this.props.deleteFish}>
 				</EditFishForm>)}
 			<AddFishForm addFish={this.props.addFish}></AddFishForm>
 			<button onClick={this.props.loadSampleFishes}>Load Sample Fishes</button>

@@ -2,12 +2,14 @@ import React from 'react';
 import sampleFishes from '../sample-fishes';
 
 class EditFishForm extends React.Component {
+	
 	handleChange = (event) => {
 		// take copy of current fish
 		const updatedFish = { ...this.props.fish, [event.currentTarget.name]: event.currentTarget.value }
 		// call updateFish method to update state
 		this.props.updateFish(this.props.index, updatedFish)
 	}
+	
 	render() {
 		return (
 			<div className="fish-edit">
@@ -19,7 +21,7 @@ class EditFishForm extends React.Component {
 				</select>
 				<textarea name="desc" onChange={this.handleChange} value={this.props.fish.desc} placeholder="Desc"/>
 				<input name="image" onChange={this.handleChange} value={this.props.fish.image} type="text" placeholder="Image"/>
-				<button type="submit">Remove Fish</button>
+				<button onClick={() => this.props.deleteFish(this.props.index)}>Remove Fish</button>
 			</div>
 		)
 	}

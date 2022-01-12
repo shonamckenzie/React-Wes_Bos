@@ -60,6 +60,15 @@ class App extends React.Component {
 		this.setState({ fishes })
 	}
 	
+	deleteFish = (key) => {
+		// take copy of current state
+		const fishes = { ...this.state.fishes }
+		// update state
+		// have to set to null to remove from firebase
+		fishes[key] = null;
+		this.setState({ fishes })
+	}
+	
 	loadSampleFishes = () => {
 		this.setState({
 			fishes: sampleFishes
@@ -72,6 +81,12 @@ class App extends React.Component {
 		// either add to order or update number in order
 		order[key] = order[key] +1 || 1;
 		// call setState to update our state object
+		this.setState({order});
+	}
+	
+	removeFromOrder = (key) => {
+		const order = { ...this.state.order };
+		delete order[key];
 		this.setState({order});
 	}
 
@@ -96,9 +111,9 @@ class App extends React.Component {
 						))}
 					</ul>
 				</div>
-				<Order fishes={this.state.fishes} order={this.state.order}></Order>
+				<Order fishes={this.state.fishes} order={this.state.order} removeFromOrder={this.removeFromOrder}></Order>
 				{/* pass addFish method as props to Inventory component */}
-				<Inventory addFish={this.addFish} updateFish={this.updateFish} loadSampleFishes={this.loadSampleFishes} fish={this.state.fishes}></Inventory>
+				<Inventory addFish={this.addFish} updateFish={this.updateFish} deleteFish={this.deleteFish} loadSampleFishes={this.loadSampleFishes} fish={this.state.fishes}></Inventory>
 			</div>
 		)
 	}
