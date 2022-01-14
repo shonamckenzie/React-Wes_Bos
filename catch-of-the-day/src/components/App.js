@@ -113,7 +113,14 @@ class App extends React.Component {
 				</div>
 				<Order fishes={this.state.fishes} order={this.state.order} removeFromOrder={this.removeFromOrder}></Order>
 				{/* pass addFish method as props to Inventory component */}
-				<Inventory addFish={this.addFish} updateFish={this.updateFish} deleteFish={this.deleteFish} loadSampleFishes={this.loadSampleFishes} fish={this.state.fishes}></Inventory>
+				<Inventory 
+					addFish={this.addFish} 
+					updateFish={this.updateFish} 
+					deleteFish={this.deleteFish} 
+					loadSampleFishes={this.loadSampleFishes} 
+					fish={this.state.fishes}
+					storeId={this.props.match.params.storeId}>
+				</Inventory>
 			</div>
 		)
 	}
